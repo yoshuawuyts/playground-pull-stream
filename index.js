@@ -5,17 +5,17 @@ const logHttp = require('http-ndjson')
 const pullHttp = require('pull-http')
 const pull = require('pull-stream')
 const bankai = require('bankai')
-const bole = require('bole')
+const pino = require('pino')
 const http = require('http')
 const path = require('path')
 
 const clientp = path.join(__dirname, 'client-main.js')
-const log = bole('main')
+const log = pino('main')
 
 createServer({ port: 1337, logLevel: 'debug' })
 
 function createServer (argv) {
-  bole.output({ level: argv.logLevel, stream: process.stdout })
+  log.level = 'debug'
   const router = createRouter()
   const server = http.createServer(function (req, res) {
     const setSize = logHttp(req, res, log.debug)
