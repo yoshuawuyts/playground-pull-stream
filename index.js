@@ -15,7 +15,7 @@ const log = pino('main')
 createServer({ port: 1337, logLevel: 'debug' })
 
 function createServer (argv) {
-  log.level = 'debug'
+  log.level = argv.logLevel
   const router = createRouter()
   const server = http.createServer(function (req, res) {
     const setSize = logHttp(req, res, log.debug)
